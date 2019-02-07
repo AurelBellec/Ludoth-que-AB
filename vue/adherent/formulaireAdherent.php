@@ -3,6 +3,7 @@
 <?php
 include_once ("../metier/adherents.php");
 include_once ("../db/Daos.php");
+
 use DAO\Personne\PersonneDAO;
 use DAO\Adherent\AdherentDAO;
 
@@ -57,6 +58,10 @@ function afficherPersonnes()
 				<td id="container"><?php echo $personne->getIdPersonne();?>
 				
 				
+				
+				
+				
+				
 				<td id="container"><a href=" " onclick=""><?php echo $personne->getPrenom() ." ". strtoupper($personne->getNom());?></a></td>
 				<td id="container"><?php echo $personne->getDateNaissance();?></td>
 				<td id="container"><?php echo $personne->getCoordonnees();?></td>
@@ -64,11 +69,15 @@ function afficherPersonnes()
 				<td id="container"><?php echo $personne->getNumeroTelephone();?></td>
 				<td id="container"><input type="radio" name="idPersonne"
 					value=" <?php echo $personne->getIdPersonne();?>"></td>
+				
+				
             <?php
 
             if (AdherentDAO::isAdherent($personne) && ! adhesionExpiree($adherent)) {
                 ?>
-			<td id="container"><img alt="rondVert" src="../images/rondVert.jpg"
+			
+				
+				<td id="container"><img alt="rondVert" src="../images/rondVert.jpg"
 					style="width: 20px;"></td>
            <?php
             } elseif (! AdherentDAO::isAdherent($personne) || adhesionExpiree($adherent)) {
@@ -83,6 +92,15 @@ function afficherPersonnes()
     } else {
         ?>
 		
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			<tr>
@@ -232,11 +250,17 @@ function formulaireModifPersonnes()
 			<div class="form-group">
 				<label for="prenom">Prénom :</label> <input type="text"
 					class="form-control" name="prenom" id="prenom"
-					value="<?php echo $personne->getPrenom();?>"> 
-					<?php
+					value="<?php echo $personne->getPrenom();?>">
+					</div>
 
-        ?>
-					<input type="hidden" name="idPersonne"
+			<div><label><button type="submit" class="btn btn-primary" name="modifier"
+					onclick="confirmation()">
+					<span class="glyphicon glyphicon-edit"></span>Mettre à jour
+				</button></label>
+				</div>	
+
+
+			<div>	<input type="hidden" name="idPersonne"
 					value=<?php echo $personne->getIdPersonne();?>> <input
 					type="hidden" name="idCoordonnees"
 					value=<?php echo $personne->getCoordonnees()->getIdCoordonnees()?>>
@@ -246,6 +270,12 @@ function formulaireModifPersonnes()
 					class="form-control" name="nom" id="nom"
 					value="<?php echo strtoupper($personne->getNom());?>">
 			</div>
+			
+			<div><label><button type="submit" class="btn btn-danger" name="supprimer">
+					<span class="glyphicon glyphicon-remove"></span>Supprimer
+				</button></label>
+				</div>	
+			
 			<div class="form-group">
 				<label for="dateNaissance">Date de naissance :</label> <input
 					type="date" class="form-control" name="dateNaissance"
@@ -283,34 +313,32 @@ function formulaireModifPersonnes()
         afficherFormulaireAdh($personne);
         afficherBeneficiaire($personne);
         ?>
-			<div id="onside">
+			<div id="bouton">
 
 				<button type="submit" class="btn btn-warning" name="retour"
 					onclick="history.go(-1)">
 					<span class="glyphicon glyphicon-backward"></span>
 				</button>
-				<button type="submit" class="btn btn-primary" name="modifier"
-					onclick="confirmation()">
-					<span class="glyphicon glyphicon-edit"></span>Mettre à jour
-				</button>
-				<button type="submit" class="btn btn-danger" name="supprimer">
-					<span class="glyphicon glyphicon-remove"></span>Supprimer
-				</button>
+
+				
 			</div>
 			<p></p>		
 				<?php
 
         if (! AdherentDAO::isAdherent($personne) || adhesionExpiree($adherent)) {
             ?>
+           
 				<div id="onside">
-				<button type="submit" name="passerAdh">Passer Adhérent</button>
+				<button type="submit" class="btn btn-success" name="passerAdh">
+					<span class="glyphicon glyphicon-plus"></span>Passer Adhérent
+				</button>
 			</div>
-			
+		
 				<?php
         }
         if (AdherentDAO::isAdherent($personne) && ! adhesionExpiree($adherent)) {
             ?>
-            <div id="onside">
+            <div id="bouton">
 				<button type="submit" class="btn btn-success" name="gererBenef">
 					<span class="glyphicon glyphicon-plus"></span>Gérer les
 					bénéficiaires
@@ -378,14 +406,14 @@ function afficherFormulaireAdh($personne)
 	</fieldset>
 </div>
 
-<div id="onside">
+<div id="info">
 	<fieldset>
 		<label for="dateAdhesion">Date Adhésion:</label> <label><?php echo $adherent->getDatePremiereAdhesion();?></label>
 		<label for="dateFinAdhesion">Date Fin adhésion:</label> <label><?php echo $adherent->getDateFinAdhesion();?></label>
 	</fieldset>
 </div>
 
-<div id="onside">
+<div id="bouton">
 	<fieldset>		
 	<?php
         if (adhesionExpiree($adherent)) {
@@ -501,13 +529,16 @@ function formulaireAjoutAdherent()
 			
 			
 	</select></td>
+
 				</tr>
+				<label class="bouton">
+				
 				<tr>
 					<button type="submit" class="btn btn-success" name="validerAdh">
 						<span class="glyphicon glyphicon-plus">Passer Adherent</span>
 					</button>
-
 				</tr>
+				</label>
 			</table>
 		</fieldset>
 	</form>
@@ -554,6 +585,15 @@ function afficherBeneficiaire($personne)
                 echo $rep;
                 ?>
  	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -640,6 +680,15 @@ function formulaireAjouterBenf()
         $i = 0;
         ?>
 		
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			<tr>
