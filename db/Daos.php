@@ -151,11 +151,11 @@ namespace DAO\Personne
 
         static function getBeneficiaire($idPersonne)
         {
-            $sql = "SELECT idPersonne FROM beneficiaire where idAdherent=" . $idPersonne;
+            $sql = "SELECT idBeneficiaire FROM beneficiaire where idAdherent=" . $idPersonne;
             $listeBeneficiaires = new \ArrayObject();
             foreach (Connexion::getInstance()->query($sql) as $row) {
                 $daoPersonne = new PersonneDAO();
-                $beneficiaire = $daoPersonne->read($row["idPersonne"]);
+                $beneficiaire = $daoPersonne->read($row["idBeneficiaire"]);
                 $listeBeneficiaires->append($beneficiaire);
             }
             return $listeBeneficiaires;
@@ -173,6 +173,16 @@ namespace DAO\Personne
             // echo "****".$existe;
             return $existe;
         }
+        
+        static function estBeneficiaireDe($personne){
+            $sql = "SELECT idAdherent FROM beneficiaire WHERE idBeneficiaire=".$personne->getIdPersonne();
+            $stmt = Connexion::getInstance()->prepare($sql);
+            $stmt->execute();
+            $idAdherent = $stmt->fetch();
+            $daoPersonne = new PersonneDAO();
+            $personne = $daoPersonne->read($idAdherent);
+            return $personne;
+        }
 
         static public function getPersonneNonAdh()
         {
@@ -184,6 +194,15 @@ namespace DAO\Personne
                 $listePersonnes->append($beneficiaire);
             }
             return $listePersonnes;
+        }
+
+        static public function associer($idPersonne, $idBeneficiaire)
+        {
+            $sql = "INSERT INTO beneficiaire VALUES (:idPersonne, :idBeneficiaire)";
+            $stmt = Connexion::getInstance()->prepare($sql);
+            $stmt->bindParam(':idPersonne', $idPersonne);
+            $stmt->bindParam(':idBeneficiaire', $idBeneficiaire);
+            $stmt->execute();
         }
     }
 }

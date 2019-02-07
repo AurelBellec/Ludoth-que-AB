@@ -14,6 +14,7 @@ include_once ("adherent/formulaireAdherent.php");
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="index.css">
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <title><?php /* Afficher titre de la page */ ?></title>
 </head>
 
@@ -22,19 +23,24 @@ include_once ("adherent/formulaireAdherent.php");
 <?php
 $page = (isset($_GET['page'])) ? htmlentities($_GET['page']) : "adherents";
 ?>
-<nav>
-		<ul>
-			<li><a href="index.php?page=adherents"><img alt="Adherents"
-					src="../images/beneficiaire.png"><br />Gérer les Adhérents</a></li>
-			<li><a href="index.php?page=jeux"><img alt="Jeux"
-					src="../images/jeu.png"><br />Gérer les Jeux</a></li>
-			<li><a href="index.php?page=emprunts"><img alt="Emprunts"
-					src="../images/emprunt.png"><br />Gérer les Emprunts</a></li>
-			<li><a href="index.php?page=parametres"><img alt="Ludotheque"
-					src="../images/parametre.png"><br />Gérer Ludothèque</a></li>
-		</ul>
-	</nav>
-	<div class="container">
+<div id="menu" class="row">
+		<div class="col-lg-2">
+			<nav class="nav navbar .navbar-left">
+				<div class="container-fluid">
+					<ul class="nav navbar-nav">
+						<li><a href="index.php?page=adherents"><img alt="Adherents"
+								src="../images/personne.png"><br />Gérer les Adhérents</a></li>
+						<li><a href="index.php?page=jeux"><img alt="Jeux"
+								src="../images/jeu.png"><br />Gérer les Jeux</a></li>
+						<li><a href="index.php?page=emprunts"><img alt="Emprunts"
+								src="../images/emprunt.png"><br />Gérer les Emprunts</a></li>
+						<li><a href="index.php?page=parametres"><img alt="Ludotheque"
+								src="../images/setup.png"><br />Gérer Ludothèque</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="col-lg-1-offset col-lg-9">
 <?php
 switch ($page) {
     case "adherents":
@@ -55,7 +61,7 @@ switch ($page) {
 }
 ?>
 </div>
-
+	</div>
 </body>
 
 </html>
