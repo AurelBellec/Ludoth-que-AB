@@ -1,6 +1,14 @@
 @charset "ISO-8859-1";
 
+@font-face{
+	font-family: 'sh_pinscherregular';    
+	src: url('../font/shpinscher-regular-webfont.woff2') format('woff2'),         
+	url('../font/shpinscher-regular-webfont.woff') format('woff');    
+	font-weight: normal;    
+	font-style: normal;
 
+
+}
 /* CSS de Texte */
 
 h1, h3 {
@@ -15,12 +23,17 @@ h1 {
 /* CSS du menu */
 
 nav {
+	
+	height: 1000px;
 	background-color: Gray;
 	text-align: center;
-	height: 100%;
 }
 
 nav ul {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	position: fixed;
 	list-style: none;
 }
 
@@ -31,6 +44,13 @@ nav li {
 nav img {
 	height: 50px;
 }
+button {
+	display: block;
+	height: 70px;
+	width: 150px;
+	font-size: 10px;!importan
+	text-align: justify;
+}
 
 
 /* CSS des Pages */
@@ -39,6 +59,75 @@ nav img {
 /* CSS de Formulaires */
 /* Adhérent*/
 
+#date{
+	display: block;
+	background-image: url("../images/pink-sticky.png");
+	position: fixed;
+	top: 350px;
+	width: 300px;
+	height: 280px;
+	float : left; 
+	display: flex;
+}
+	#jour{
+		position: absolute;
+		top: 10px;
+		left: 30px;
+		font-size: 18px;
+		padding: 5px;
+
+	}
+
+	#heure{
+		position: absolute;
+		top : 50px;
+		left: 30px;
+		font-size: 18px;
+		padding: 5px;
+		font-family: "sh_pinscherregular", calibri;
+	}
+#bouton {
+
+	float: right;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	right: 300px;
+
+}
+
+#info{
+	position: fixed;
+	width: 300px;
+	height: 280px;
+	background-image: url("../images/yellow-sticky.png");
+	float : left; 
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+		
+}
+#rules{
+	
+	display: flex;
+	position: fixed;
+	top: 180px;
+	left: 325px;
+	flex-direction: column;
+}
+
+#click {
+	margin: 5px;
+}
+
+#adh{
+	position: absolute;
+	left: 250px;
+	width: 500px;
+	
+
+
+}
 
 
 

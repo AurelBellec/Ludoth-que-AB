@@ -36,6 +36,8 @@ $page = (isset($_GET['page'])) ? htmlentities($_GET['page']) : "adherents";
 								src="../images/emprunt.png"><br />Gérer les Emprunts</a></li>
 						<li><a href="index.php?page=parametres"><img alt="Ludotheque"
 								src="../images/setup.png"><br />Gérer Ludothèque</a></li>
+						<li><a href="https://www.facebook.com/bettonludique/" target="_blank"><img alt="facebook"
+								src="../images/facebook.png"><br />Facebook</a></li>
 					</ul>
 				</div>
 			</nav>
